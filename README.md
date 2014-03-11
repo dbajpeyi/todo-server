@@ -1,4 +1,5 @@
 # todo-server
+[![Build Status](https://travis-ci.org/caulagi/todo-server.png?branch=master)](https://travis-ci.org/caulagi/todo-server)
 
 A simple Flask application that exposes APIs to build
 a todo application.  See [todo-client](https://github.com/caulagi/todo-client)

@@ -1,3 +1,19 @@
+"""
+project.instance
+
+Expose the Flask application
+"""
 from flask import Flask
 
-app = Flask(__name__)
+def create_app(package_name):
+    app = Flask(package_name)
+
+    from project.database import db_init
+    app.db = db_init()
+
+    from project.routes import routes_init
+    routes_init(app)
+
+    return app
+
+app = create_app(__name__)

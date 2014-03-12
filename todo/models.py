@@ -1,4 +1,3 @@
-from project.database import db
 from mongoengine import *
     
 class Todo(Document):

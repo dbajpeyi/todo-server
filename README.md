@@ -16,7 +16,7 @@ Sigh!
 
         $ mkvirtualenv todo
         $ pip install -r requirements.txt
-        $ gunicorn todo.server:app
+        $ python runserver.py
 
 ### Tests
 

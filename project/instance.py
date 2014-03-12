@@ -1,7 +1,7 @@
 """
 project.instance
 
-Expose the Flask application
+Create and expose the Flask application
 """
 from flask import Flask
 

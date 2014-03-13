@@ -14,6 +14,7 @@ def todo_as_dict(todo):
     return {
         "activity": todo.activity,
         "completed": todo.completed,
+        "id": str(todo.id),
     }
 
 class TodoListView(Resource):
@@ -26,10 +27,23 @@ class TodoListView(Resource):
         return resp
     
 class AddTodoView(Resource):
-    """View to list and update a single todo"""
+    """Add this task to db"""
 
     def post(self):
         args = parser.parse_args()
         todo = Todo(args["task"])
         todo.save()
         return todo_as_dict(todo)
+
+class ToggleTodoStateView(Resource):
+
+    def get(self, id):
+        todo = Todo.objects(id=id).first()
+        todo.completed = not todo.completed
+        todo.save()
+        return todo_as_dict(todo)
+
+class ShowTodoView(Resource):
+    
+    def get(self, id):
+        return todo_as_dict(Todo.objects(id=id).first())

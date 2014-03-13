@@ -4,8 +4,11 @@ todo.api
 Expose API for our models
 """
 import json
-from flask.ext.restful import Resource
+from flask.ext.restful import reqparse, Resource
 from todo.models import Todo
+
+parser = reqparse.RequestParser()
+parser.add_argument('task', type=str)
 
 def todo_as_dict(todo):
     return {
@@ -22,8 +25,11 @@ class TodoListView(Resource):
             resp['todos'].append(todo_as_dict(todo))
         return resp
     
-class TodoView(Resource):
+class AddTodoView(Resource):
     """View to list and update a single todo"""
 
-    def get(self, id):
-        return Todo.objects(id=id).first().to_json()
+    def post(self):
+        args = parser.parse_args()
+        todo = Todo(args["task"])
+        todo.save()
+        return todo_as_dict(todo)

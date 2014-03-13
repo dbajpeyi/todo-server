@@ -13,5 +13,6 @@ def routes_init(app):
     api.add_resource(AddTodoView, "/api/v1/todos/add")
     api.add_resource(ToggleTodoStateView, "/api/v1/todos/<string:id>/toggle")
     api.add_resource(ShowTodoView, "/api/v1/todos/<string:id>")
+    api.add_resource(CompleteAllTodosView, "/api/v1/todos/completeall")
 
     return api

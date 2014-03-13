@@ -36,6 +36,7 @@ class AddTodoView(Resource):
         return todo_as_dict(todo)
 
 class ToggleTodoStateView(Resource):
+    """Toggle the completed flag for this todo"""
 
     def get(self, id):
         todo = Todo.objects(id=id).first()
@@ -44,6 +45,14 @@ class ToggleTodoStateView(Resource):
         return todo_as_dict(todo)
 
 class ShowTodoView(Resource):
+    """Show details corresponding to this todo"""
     
     def get(self, id):
         return todo_as_dict(Todo.objects(id=id).first())
+
+class CompleteAllTodosView(Resource):
+    """Mark all tasks as completed"""
+    
+    def get(self):
+        Todo.objects.update(upsert=True, **{"set__completed": True})
+        return {"status": "ok"}

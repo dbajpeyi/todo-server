@@ -3,14 +3,24 @@ todo.api
 
 Expose API for our models
 """
+import json
 from flask.ext.restful import Resource
 from todo.models import Todo
 
+def todo_as_dict(todo):
+    return {
+        "activity": todo.activity,
+        "completed": todo.completed,
+    }
+
 class TodoListView(Resource):
-    """View to list all todos"""
+    """Get the list of todos"""
 
     def get(self):
-        return Todo.objects().to_json()
+        resp = {'todos': []}
+        for todo in Todo.objects():
+            resp['todos'].append(todo_as_dict(todo))
+        return resp
     
 class TodoView(Resource):
     """View to list and update a single todo"""

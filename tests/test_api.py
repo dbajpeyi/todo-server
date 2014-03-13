@@ -32,7 +32,6 @@ class ServerTestCase(unittest.TestCase):
         t2.save()
 
         resp = self.client.get("/api/v1/todos")
-        # need to call json.loads twice because resp.data is forced to string
-        data = json.loads(json.loads(resp.data))
+        data = json.loads(resp.data)
         # TODO: Fix initialising db to clear prev data
-        assert len(data[0]) >= 2
+        assert len(data['todos']) >= 2

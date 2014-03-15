@@ -26,5 +26,4 @@ def test_creating_todo_list(app):
 
     resp = app.client.get("/api/v1/todos")
     data = json.loads(resp.data)
-    # TODO: Fix initialising db to clear prev data
-    assert len(data['todos']) >= 2
+    assert len(data['todos']) == 2
